@@ -4,14 +4,13 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import utils.Driver;
 
-public class FirstTest {
+public class Test1 {
 
     public static Driver driver = null;
 
     @Test
     public void firstTest(){
         driver = Driver.getInstance();
-        driver.maximize();
         driver.navigate("http://automationpractice.com");
 
         //search for dress

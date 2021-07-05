@@ -1,19 +1,16 @@
 package tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import utils.Driver;
 
-public class ThirdTest {
+public class Test3 {
     public static Driver driver = null;
 
     @Test
     public void thirdTest() {
 
         driver = Driver.getInstance();
-        driver.maximize();
         driver.navigate("http://automationpractice.com");
 
         //search for dress
@@ -38,19 +35,13 @@ public class ThirdTest {
         //click on Add to cart button
         driver.webDriver.findElement(By.id("add_to_cart")).click();
 
-        //added this to wait for the dialog to be displayed because the test was failing for not seeing the Proceed button visible
-        WebDriverWait wait = new WebDriverWait(driver.webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("layer_cart")));
-
         //proceed to checkout
+        driver.waitForElementToLoad(By.id("layer_cart"));
         driver.webDriver.findElement(By.xpath("//a[@title='Proceed to checkout']")).click();
 
         //delete the product
         driver.webDriver.findElement(By.className("icon-trash")).click();
 
         driver.exit();
-
     }
-
-
 }
