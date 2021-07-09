@@ -1,31 +1,22 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import utils.Driver;
+import pages.HomePage;
+import pages.ProductPage;
+import pages.ResultsPage;
 
-public class Test1 {
-
-    public static Driver driver = null;
+public class Test1 extends BaseTest {
 
     @Test
-    public void firstTest(){
-        driver = Driver.getInstance();
-        driver.navigate("http://automationpractice.com");
+    public void addToCartTest() {
+        HomePage homePage = new HomePage(driver.webDriver);
+        ResultsPage resultsPage = new ResultsPage(driver.webDriver);
+        ProductPage productPage = new ProductPage(driver.webDriver);
 
-        //search for dress
-        driver.webDriver.findElement(By.id("search_query_top")).sendKeys("dress");
-
-        //click on search button
-        driver.webDriver.findElement(By.className("button-search")).click();
-
-        //click on the first item on the page
-        driver.webDriver.findElement(By.xpath("//ul[@class='product_list grid row']/li[1]")).click();
-
-        //click on Add to cart button
-        driver.webDriver.findElement(By.id("add_to_cart")).click();
-
-        driver.exit();
+        homePage.searchForItem("dress");
+        homePage.clickSearchButton();
+        resultsPage.clickTheFirstItem();
+        productPage.clickAddToCartButton();
 
     }
 }

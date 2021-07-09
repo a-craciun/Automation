@@ -1,10 +1,7 @@
 package utils;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +10,7 @@ public class Driver {
     private static Driver driver = null;
     public RemoteWebDriver webDriver;
 
-    private Driver() {
+    public Driver() {
         setNewDriver();
     }
 
@@ -57,10 +54,5 @@ public class Driver {
 
     public void navigate(String s) {
         webDriver.get(s);
-    }
-
-    public void waitForElementToLoad(By by) {
-        WebDriverWait wait = new WebDriverWait(driver.webDriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 }

@@ -1,38 +1,27 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import utils.Driver;
+import pages.HomePage;
+import pages.ProductPage;
+import pages.ResultsPage;
 
-public class Test2 {
-
-    public static Driver driver = null;
+public class Test2 extends BaseTest {
 
     @Test
-    public void secondTest() {
-        driver = Driver.getInstance();
-        driver.navigate("http://automationpractice.com");
+    public void changeSizeAndColorTest() {
 
-        //search for dress
-        driver.webDriver.findElement(By.id("search_query_top")).sendKeys("dress");
+        HomePage homePage = new HomePage(driver.webDriver);
+        ResultsPage resultsPage = new ResultsPage(driver.webDriver);
+        ProductPage productPage = new ProductPage(driver.webDriver);
 
-        //click on search button
-        driver.webDriver.findElement(By.className("button-search")).click();
+        homePage.searchForItem("dress");
+        homePage.clickSearchButton();
 
-        //click on the second item on the page
-        driver.webDriver.findElement(By.xpath("//ul[@class='product_list grid row']/li[2]")).click();
+        resultsPage.clickTheSecondItem();
 
-        //change size
-        driver.webDriver.findElement(By.xpath("//select[@id='group_1']")).click();
-        driver.webDriver.findElement(By.xpath("//option[contains(text(),'L')]")).click();
-
-        //change color
-        driver.webDriver.findElement(By.id("color_24")).click();
-
-        //click on Add to cart button
-        driver.webDriver.findElement(By.id("add_to_cart")).click();
-
-        driver.exit();
+        productPage.changeSize();
+        productPage.changeColor();
+        productPage.clickAddToCartButton();
 
     }
 }
